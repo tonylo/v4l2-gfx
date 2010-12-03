@@ -7,8 +7,20 @@ GStreamer setup.
 
 Build Pre-requisities (Linux)
 -----------------------------
-For builds on Linux you need access to the SGX kernel services DDK, there is a
-GPL version which should contain the right headers and you will also need to 
-build the kernel services also, in order to link against the module symbols.
+First it's advisable to get access to a suitable OS environment. For the
+community at large the best place is probably Pandaboard.org. Other TI
+customers/partners may be working with the so called 'L24' releases.
 
-More text will follow
+For builds on Linux you need access to the SGX kernel services DDK, there is a
+GPL version of this I believe. The DDK should contain the right headers and
+you will also need to build the kernel services also in order to link against
+the module symbols. You will need to get access to the SGX user side binaries
+in order to have a working SGX setup though - these should be available as
+part of the OS environment mentioned earlier.
+
+Build (Linux)
+-------------
+Checkout the instructions in the file "ddk/kbuild/Makefile" to integrate
+this driver against the SGX kernel services. It will then build
+
+
