@@ -1,0 +1,14 @@
+V4L2-GFX
+========
+This is a Linux kernel module which implements a V4L2 video capture interface
+and also interfaces with OMAP SGX kernel services so GL applications can
+stream textures originating from V4L2 clients for e.g. an appropriate
+GStreamer setup.
+
+Build Pre-requisities (Linux)
+-----------------------------
+For builds on Linux you need access to the SGX kernel services DDK, there is a
+GPL version which should contain the right headers and you will also need to 
+build the kernel services also, in order to link against the module symbols.
+
+More text will follow
