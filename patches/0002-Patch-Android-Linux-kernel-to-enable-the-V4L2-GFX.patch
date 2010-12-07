@@ -1,0 +1,71 @@
+From 1282021e1d2118f036a7ee5fe84c2d8f83a1fd9a Mon Sep 17 00:00:00 2001
+From: Tony Lofthouse <tony.lofthouse@ti.com>
+Date: Tue, 7 Dec 2010 12:30:31 -0500
+Subject: [PATCH] Patch Android Linux kernel to enable the V4L2-GFX.
+
+The number of 'devices' supported by the SGX driver needs to be
+increased to support the V4L2-GFX buffer class device.
+
+The other changes facilitate the build of the sources
+under driver/media/video/v4l2-gfx/
+
+Signed-off-by: Tony Lofthouse <tony.lofthouse@ti.com>
+---
+ arch/arm/configs/android_4430_defconfig |    1 +
+ drivers/gpu/pvr/omap4/sysinfo.h         |    2 +-
+ drivers/media/video/Kconfig             |    2 ++
+ drivers/media/video/Makefile            |    1 +
+ 4 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/arch/arm/configs/android_4430_defconfig b/arch/arm/configs/android_4430_defconfig
+index e175993..023bf4d 100644
+--- a/arch/arm/configs/android_4430_defconfig
++++ b/arch/arm/configs/android_4430_defconfig
+@@ -1300,6 +1300,7 @@ CONFIG_VIDEO_HELPER_CHIPS_AUTO=y
+ CONFIG_VIDEO_IR_I2C=y
+ # CONFIG_VIDEO_VIVI is not set
+ CONFIG_VIDEO_OMAP2_VOUT=y
++CONFIG_VIDEO_OMAP_GFX=y
+ # CONFIG_VIDEO_SAA5246A is not set
+ # CONFIG_VIDEO_SAA5249 is not set
+ # CONFIG_SOC_CAMERA is not set
+diff --git a/drivers/gpu/pvr/omap4/sysinfo.h b/drivers/gpu/pvr/omap4/sysinfo.h
+index 0771827..80b86fe 100644
+--- a/drivers/gpu/pvr/omap4/sysinfo.h
++++ b/drivers/gpu/pvr/omap4/sysinfo.h
+@@ -35,6 +35,6 @@
+ 
+ #define WAIT_TRY_COUNT				(10000)
+ 
+-#define SYS_DEVICE_COUNT 3
++#define SYS_DEVICE_COUNT 4
+ 
+ #endif
+diff --git a/drivers/media/video/Kconfig b/drivers/media/video/Kconfig
+index bdbc9d3..3ca3aaa 100644
+--- a/drivers/media/video/Kconfig
++++ b/drivers/media/video/Kconfig
+@@ -633,6 +633,8 @@ config VIDEO_ISIF
+ 
+ source "drivers/media/video/omap/Kconfig"
+ 
++source "drivers/media/video/v4l2-gfx/Kconfig"
++
+ source "drivers/media/video/bt8xx/Kconfig"
+ 
+ config VIDEO_PMS
+diff --git a/drivers/media/video/Makefile b/drivers/media/video/Makefile
+index fdd8f58..4a81f11 100644
+--- a/drivers/media/video/Makefile
++++ b/drivers/media/video/Makefile
+@@ -181,6 +181,7 @@ obj-$(CONFIG_DMM_OMAP)  += dmm/
+ obj-$(CONFIG_TILER_OMAP)  += tiler/
+ 
+ obj-$(CONFIG_ARCH_OMAP)	+= omap/
++obj-$(CONFIG_VIDEO_OMAP_GFX) += v4l2-gfx/
+ 
+ EXTRA_CFLAGS += -Idrivers/media/dvb/dvb-core
+ EXTRA_CFLAGS += -Idrivers/media/dvb/frontends
+-- 
+1.5.4.3
+

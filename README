@@ -23,4 +23,18 @@ Build (Linux)
 Checkout the instructions in the file "ddk/kbuild/Makefile" to integrate
 this driver against the SGX kernel services. It will then build
 
+Note that the PVR kernel services may need to be patched to support
+an additional 'device':
 
+See the platform file 'sysinfo.h'
+
+-#define SYS_DEVICE_COUNT 3
++#define SYS_DEVICE_COUNT 4
+
+Build (Android)
+---------------
+In Android OMAP kernel trees the PVR kernel services are part of the kernel
+rather than being in a seperate DDK (as Linux).
+
+The patch 0002-Patch-Android-Linux-kernel-to-enable-the-V4L2-GFX.patch
+describes how to patch the kernel to support this driver.
